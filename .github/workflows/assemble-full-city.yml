@@ -1,0 +1,101 @@
+name: Assemble Full City Asset Pack
+
+on:
+  workflow_dispatch:
+    inputs:
+      resolution:
+        description: Poly Haven PBR resolution
+        required: true
+        default: 8k
+        type: choice
+        options: [4k, 8k]
+  pull_request:
+    branches: [main]
+    paths:
+      - 'fullcity/**'
+      - 'unity/**'
+      - '.github/workflows/assemble-full-city.yml'
+  push:
+    branches: ['feat/full-city-v1']
+    paths:
+      - 'fullcity/**'
+      - 'unity/**'
+      - '.github/workflows/assemble-full-city.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate source
+        run: |
+          python -m py_compile fullcity/tools/fetch_assets.py
+          node --check fullcity/game/main.js
+
+      - name: Download and assemble CC0 library
+        run: |
+          RES='${{ inputs.resolution }}'
+          if [ -z "$RES" ]; then RES='8k'; fi
+          python fullcity/tools/fetch_assets.py --resolution "$RES"
+
+      - name: Copy asset library into Unity project package
+        run: |
+          mkdir -p unity/Assets/ThirdParty/CC0
+          cp -a fullcity/vendor-assets/. unity/Assets/ThirdParty/CC0/
+          cp fullcity/asset-manifest.json unity/Assets/ThirdParty/CC0/ASSET_MANIFEST.json
+
+      - name: Build size report
+        run: |
+          echo '# Granivel City Full City build' > FULL_CITY_BUILD_REPORT.md
+          echo '' >> FULL_CITY_BUILD_REPORT.md
+          echo "Built: $(date -u +'%Y-%m-%d %H:%M UTC')" >> FULL_CITY_BUILD_REPORT.md
+          echo '' >> FULL_CITY_BUILD_REPORT.md
+          echo '## Sizes' >> FULL_CITY_BUILD_REPORT.md
+          echo "- Vendor assets: $(du -sh fullcity/vendor-assets | cut -f1)" >> FULL_CITY_BUILD_REPORT.md
+          echo "- Unity package tree: $(du -sh unity | cut -f1)" >> FULL_CITY_BUILD_REPORT.md
+          echo "- Web game source: $(du -sh fullcity/game | cut -f1)" >> FULL_CITY_BUILD_REPORT.md
+          echo '' >> FULL_CITY_BUILD_REPORT.md
+          echo 'See fullcity/vendor-assets/PROVENANCE.json for source/license status.' >> FULL_CITY_BUILD_REPORT.md
+          cat FULL_CITY_BUILD_REPORT.md
+          du -ah fullcity/vendor-assets | sort -h | tail -40
+
+      - name: Package source bundle
+        run: |
+          mkdir -p dist/GranivelCity-FullCity-V1
+          cp -a fullcity/game dist/GranivelCity-FullCity-V1/web-game
+          cp -a fullcity/vendor-assets dist/GranivelCity-FullCity-V1/vendor-assets
+          cp -a unity dist/GranivelCity-FullCity-V1/unity
+          cp fullcity/asset-manifest.json dist/GranivelCity-FullCity-V1/
+          cp FULL_CITY_BUILD_REPORT.md dist/GranivelCity-FullCity-V1/
+
+      - name: Upload Full City package
+        uses: actions/upload-artifact@v4
+        with:
+          name: GranivelCity-FullCity-V1
+          path: dist/GranivelCity-FullCity-V1
+          compression-level: 0
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Upload provenance report
+        uses: actions/upload-artifact@v4
+        with:
+          name: GranivelCity-Provenance
+          path: |
+            fullcity/vendor-assets/PROVENANCE.json
+            FULL_CITY_BUILD_REPORT.md
+          retention-days: 30
+          if-no-files-found: error
