@@ -1,0 +1,46 @@
+name: Deploy Granivel City Web Test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['feat/full-city-v1', main]
+    paths:
+      - 'fullcity/game/**'
+      - '.github/workflows/deploy-fullcity-pages.yml'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate JavaScript
+        run: node --check fullcity/game/main.js
+      - name: Prepare Pages artifact
+        run: |
+          mkdir -p _site
+          cp -a fullcity/game/. _site/
+          printf '%s\n' 'Granivel City Full City V1 — CC0 web test' > _site/VERSION.txt
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
