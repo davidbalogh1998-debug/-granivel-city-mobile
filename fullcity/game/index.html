@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>Granivel City — Full City V1</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="loading">
+    <div class="logo">GRANIVEL <span>CITY</span></div>
+    <div id="loadingText">Város betöltése…</div>
+    <div class="bar"><i id="loadingBar"></i></div>
+  </div>
+
+  <canvas id="game"></canvas>
+
+  <div id="hud">
+    <div class="top-left">
+      <div class="money" id="money">$ 2 500</div>
+      <div class="health"><i id="healthBar"></i></div>
+      <div id="mission">Küldetés: menj a jelölt autóhoz.</div>
+    </div>
+    <div class="top-right">
+      <div id="wanted" class="wanted">☆☆☆☆☆</div>
+      <canvas id="minimap" width="180" height="180"></canvas>
+    </div>
+    <div id="speed" class="speed hidden"><b id="speedValue">0</b><span>km/h</span></div>
+    <div id="interaction"></div>
+    <div class="credit">CC0 assets · Powered by Poly Haven · Kenney · Quaternius</div>
+  </div>
+
+  <div id="mobileControls">
+    <div id="joy" class="joy"><div id="knob"></div></div>
+    <div class="buttons">
+      <button id="btnAction" class="round action">E</button>
+      <button id="btnShoot" class="round shoot">●</button>
+      <button id="btnSprint" class="round sprint">⇧</button>
+      <button id="btnBrake" class="round brake">▰</button>
+    </div>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
