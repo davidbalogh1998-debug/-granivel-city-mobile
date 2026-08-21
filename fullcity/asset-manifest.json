@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "licensePolicy": "CC0-only",
   "kenney": [
     {
@@ -57,6 +57,34 @@
       "folder": "https://drive.google.com/drive/folders/1-Kl0L_Jg8awbh0S5T-z3zxh4mVlnxTpa?usp=sharing",
       "license": "CC0-1.0",
       "source": "https://quaternius.com/packs/ultimatenature.html"
+    },
+    {
+      "name": "Public Transport Pack",
+      "folder": "https://drive.google.com/drive/folders/1GUIE138uPVNraiQEf33dIx9wENhttZ15?usp=sharing",
+      "license": "CC0-1.0",
+      "source": "https://quaternius.com/packs/publictransport.html"
+    },
+    {
+      "name": "Simple Buildings Pack",
+      "folder": "https://drive.google.com/drive/folders/1r-FcNFxC6ziN0oI3GqZJdEkdzglFQHQH?usp=sharing",
+      "license": "CC0-1.0",
+      "source": "https://quaternius.com/packs/simplebuildings.html"
+    },
+    {
+      "name": "Furniture Pack",
+      "folder": "https://drive.google.com/drive/folders/1CLWStkb7cipC1ZdTunYJXKVqEVwtXWXK?usp=sharing",
+      "license": "CC0-1.0",
+      "source": "https://quaternius.com/packs/furniture.html"
+    }
+  ],
+  "optionalReferencePacks": [
+    {
+      "name": "Downtown City MegaKit Standard",
+      "downloadPage": "https://quaternius.itch.io/downtown-city-megakit",
+      "license": "CC0-1.0",
+      "sizeReported": "223 MB",
+      "modelsReported": 315,
+      "note": "Free standard pack; not auto-downloaded because itch.io uses an interactive download flow."
     }
   ],
   "polyHaven": {
@@ -87,7 +115,12 @@
       "mixed_brick_wall",
       "plastered_wall_02",
       "concrete_wall_005",
-      "concrete_brick_wall_001"
+      "concrete_brick_wall_001",
+      "concrete_pavement_03",
+      "grooved_concrete_driveway",
+      "patterned_concrete_pavers",
+      "worn_patterned_pavers",
+      "anti_slip_concrete"
     ]
   }
 }
