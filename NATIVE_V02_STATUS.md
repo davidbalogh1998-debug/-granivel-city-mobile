@@ -1,20 +1,27 @@
-# Granivel City Mobile — Native V0.2 Visual Upgrade
+# Granivel City — Budapest RP PC V0.2
 
-A böngészős `play3.html` továbbra is csak gyors Safari-prototípus. A komolyabb grafikai fejlesztés már a natív Unity projekten történik.
+A projekt iránya módosult: **PC-only Budapest RP**. A korábbi mobilos/fiktív 240×240 méteres városréteg kikerült; a meglévő gameplay rendszerekre valós Budapest-streaming került.
 
-## Elkészült a V0.2 alapban
+## Elkészült ebben a körben
 
-- 29 procedurális PBR textúratérkép
-- aszfalt, beton, járda, tégla, homlokzat, bőr és ruhaszövet anyagok
-- normal map támogatás és mobilos importbeállítások
-- emberibb testarányú procedurális karakter fejjel, arcrészletekkel, hajjal, karokkal, kezekkel, lábakkal, cipővel és ruharétegekkel
-- procedurális járás/futás végtaganimáció
-- részletesebb járműkarosszéria, üveg, lámpák, kerekek és lökhárítók
-- részletesebb városi környezet: járdák, szegélyek, ablakok, ajtók, tetőelemek, utcai lámpák
-- fejlettebb nappal/éjszaka fény- és ködrendszer
-- 4x MSAA, magasabb árnyékminőség, LOD és anisotropic filtering mobilos minőségi profil
-- HDR-kompatibilis third-person kamera
+- PC input: WASD + egér, célzás, lövés, járműbe be-/kiszállás
+- Deák Ferenc tér középpontú 1:1 Web-Mercator koordinátarendszer
+- OpenStreetMap alapú valós úthálózat streamelése
+- OSM épület-footprintek, `height` / `building:levels` alapú magasság
+- Duna/vízfelületek és parkok
+- Mapzen/AWS Terrain Tiles alapú domborzat és helyi cache
+- tile-alapú open-world streaming Budapest teljes területéhez
+- procedurális aszfalt/fal/üveg/víz anyagok
+- budapesti forgalom és gyalogos populáció
+- 1–5 csillagos BRFK körözési rendszer
+- járművezetés + üzemanyag
+- RP állapot: készpénz, bank, éhség, szomjúság, munka
+- Budapesthez kötött intro küldetés: Vörösmarty tér → Nyugati pályaudvar
+- Windows x64 build helper
+- OSM/ODbL attribution
 
-## Következő szint
+## Fontos
 
-A valódi fotórealisztikus AAA karakterhez riggelt high-poly/LOD embermodell, arcanimáció, haj-shader és motion-capture animáció kell. A V0.2 architektúra ezt már külön vizuális rétegként tudja fogadni anélkül, hogy a gameplay rendszert újra kellene írni.
+A földrajzi Budapest, utak, domborzat és az OSM-ben szereplő épület-alaprajzok 1:1 méretarányban kezelhetők. Ez nem azonos azzal, hogy minden valódi budapesti épület, belső tér, ember és autó GTA V-szintű fotogrammetriai assetként már kész lenne; az külön AAA assetgyártási réteg.
+
+A teljes PC Unity projekt jelenlegi csomagja: `GranivelCity_BudapestRP_PC_V0.2.zip`.
