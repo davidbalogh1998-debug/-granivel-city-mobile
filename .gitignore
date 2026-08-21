@@ -1,0 +1,19 @@
+# Unity generated
+unity/[Ll]ibrary/
+unity/[Tt]emp/
+unity/[Oo]bj/
+unity/[Bb]uild/
+unity/[Bb]uilds/
+unity/[Ll]ogs/
+unity/[Uu]ser[Ss]ettings/
+
+# Large CC0 assets are assembled by GitHub Actions
+fullcity/vendor-assets/
+unity/Assets/ThirdParty/CC0/
+dist/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
