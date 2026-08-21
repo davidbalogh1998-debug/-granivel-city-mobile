@@ -1,0 +1,16 @@
+{
+  "product": "Granivel City — Budapest RP",
+  "schema": 1,
+  "zoom": 14,
+  "bounds": {
+    "south": 47.33,
+    "north": 47.62,
+    "west": 18.83,
+    "east": 19.36
+  },
+  "tile_count": 520,
+  "providers": {
+    "map_geometry": "OpenStreetMap contributors / ODbL",
+    "elevation": "Mapzen Terrain Tiles / AWS public dataset"
+  }
+}
